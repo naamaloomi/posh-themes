@@ -19,10 +19,9 @@ function Write-Theme {
 
     $prompt = ""
 
-    $prompt += Write-Prompt -Object $sFailed -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor
-
     $lastColor = $sl.Colors.PromptBackgroundColor
     $prompt += Write-Prompt -Object $sl.PromptSymbols.StartSymbol -ForegroundColor $sl.Colors.UserBackgroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+    $prompt += Write-Prompt -Object $sFailed -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor
     $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $sl.Colors.SessionInfoBackgroundColor -BackgroundColor $sl.Colors.UserBackgroundColor
 
     #check for elevated prompt
@@ -75,6 +74,7 @@ $sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0B0)
 $sl.PromptSymbols.StartSymbol = [char]::ConvertFromUtf32(0x250C)
 $sl.PromptSymbols.NewLineSymbol = [char]::ConvertFromUtf32(0x2514) + [char]::ConvertFromUtf32(0x25B6)
 $sl.Colors.PromptForegroundColor = [ConsoleColor]::White
+$sl.Colors.PromptBackgroundColor = [System.ConsoleColor]::DarkCyan
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::White
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::DarkBlue
 $sl.Colors.GitForegroundColor = [ConsoleColor]::Black
