@@ -22,12 +22,8 @@ function Write-Theme {
     $prompt += Write-Prompt -Object $sFailed -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor
 
     $lastColor = $sl.Colors.PromptBackgroundColor
-    $prompt += Write-Prompt -Object $sl.PromptSymbols.StartSymbol -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+    $prompt += Write-Prompt -Object $sl.PromptSymbols.StartSymbol -ForegroundColor $sl.Colors.UserBackgroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
     $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $sl.Colors.SessionInfoBackgroundColor -BackgroundColor $sl.Colors.UserBackgroundColor
-
-    if ($sl.PromptSymbols.StartSymbol -ne ' ') {
-        $prompt += Write-Prompt -Object $sl.PromptSymbols.StartSymbol -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
-    }
 
     #check for elevated prompt
     If (Test-Administrator) {
@@ -69,12 +65,15 @@ function Write-Theme {
 
     # Writes the postfix to the prompt
     $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $lastColor
-    $prompt += ' '
+    $prompt += Set-Newline
+    $prompt += Write-Prompt -Object $sl.PromptSymbols.NewLineSymbol -ForegroundColor $sl.Colors.UserBackgroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
     $prompt
 }
 
 $sl = $global:ThemeSettings #local settings
 $sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0B0)
+$sl.PromptSymbols.StartSymbol = [char]::ConvertFromUtf32(0x250C)
+$sl.PromptSymbols.NewLineSymbol = [char]::ConvertFromUtf32(0x2514) + [char]::ConvertFromUtf32(0x25B6)
 $sl.Colors.PromptForegroundColor = [ConsoleColor]::White
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::White
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::DarkBlue
