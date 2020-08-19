@@ -11,21 +11,15 @@ function Write-Theme {
 
     $lastColor = $sl.Colors.PromptBackgroundColor
     
-    # timestamp
-    $sTime = " $(Get-Date -Format HH:mm:ss)"
-
-    # check the last command state and indicate if failed
+     # check the last command state and indicate if failed
     $sFailed = ""
     If ($lastCommandFailed) {
         $sFailed = " $($sl.PromptSymbols.FailedCommandSymbol)"
     }
 
-    $rightPrompt = "$sFailed$sTime"
     $prompt = ""
-    $prompt += Set-CursorForRightBlockWrite -textLength $rightPrompt.Length
 
     $prompt += Write-Prompt -Object $sFailed -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor
-    $prompt += Write-Prompt -Object $sTime   -ForegroundColor $sl.colors.TimestampForegroundColor
 
     $lastColor = $sl.Colors.PromptBackgroundColor
     $prompt += Write-Prompt -Object $sl.PromptSymbols.StartSymbol -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
@@ -33,11 +27,6 @@ function Write-Theme {
 
     if ($sl.PromptSymbols.StartSymbol -ne ' ') {
         $prompt += Write-Prompt -Object $sl.PromptSymbols.StartSymbol -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
-    }
-
-    #check the last command state and indicate if failed
-    If ($lastCommandFailed) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FailedCommandSymbol) " -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
     }
 
     #check for elevated prompt
