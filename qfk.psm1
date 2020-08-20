@@ -66,13 +66,14 @@ function Write-Theme {
     $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $lastColor
     $prompt += Set-Newline
     $prompt += Write-Prompt -Object $sl.PromptSymbols.NewLineSymbol -ForegroundColor $sl.Colors.UserBackgroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+    $prompt += " "
     $prompt
 }
 
 $sl = $global:ThemeSettings #local settings
 $sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0B0)
 $sl.PromptSymbols.StartSymbol = [char]::ConvertFromUtf32(0x250C)
-$sl.PromptSymbols.NewLineSymbol = [char]::ConvertFromUtf32(0x2514) + [char]::ConvertFromUtf32(0x25B6)
+$sl.PromptSymbols.NewLineSymbol = [char]::ConvertFromUtf32(0x2514) + $sl.PromptSymbols.SegmentForwardSymbol
 $sl.Colors.PromptForegroundColor = [ConsoleColor]::White
 $sl.Colors.PromptBackgroundColor = [System.ConsoleColor]::DarkCyan
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::White
