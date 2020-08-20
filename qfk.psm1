@@ -26,13 +26,13 @@ function Write-Theme {
 
     #check for elevated prompt
     If (Test-Administrator) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.ElevatedSymbol) " -ForegroundColor $sl.Colors.AdminIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.ElevatedSymbol)" -ForegroundColor $sl.Colors.AdminIconForegroundColor -BackgroundColor $sl.Colors.UserBackgroundColor
     }
 
     $user = $sl.CurrentUser
     $computer = $sl.CurrentHostname
     if (Test-NotDefaultUser($user)) {
-        $prompt += Write-Prompt -Object " $user@$computer " -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.UserBackgroundColor
+        $prompt += Write-Prompt -Object " $user@$computer " -ForegroundColor $sl.Colors.UserForegroundColor -BackgroundColor $sl.Colors.UserBackgroundColor
     }
 
     if (Test-VirtualEnv) {
@@ -85,3 +85,4 @@ $sl.Colors.WithBackgroundColor = [ConsoleColor]::DarkRed
 $sl.Colors.VirtualEnvBackgroundColor = [System.ConsoleColor]::Red
 $sl.Colors.VirtualEnvForegroundColor = [System.ConsoleColor]::White
 $sl.Colors.UserBackgroundColor = [System.ConsoleColor]::DarkMagenta
+$sl.Colors.UserForegroundColor = [System.ConsoleColor]::White
